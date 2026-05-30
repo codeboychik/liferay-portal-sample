@@ -16,7 +16,7 @@ permissions:
 jobs:
   build:
     name: Build and Push
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v6
