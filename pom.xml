@@ -104,8 +104,8 @@
 			</plugin>
 		</plugins>
 	</build>
-    <!--<modules>
+    <modules>
 		<module>modules</module>
 		<module>themes</module>
-    </modules>-->
+    </modules>
 </project>
