@@ -12,6 +12,8 @@ jobs:
           sudo apt install wireguard
           mkdir ~/.ssh
           touch ~/.ssh/deployer
+          touch ~/.ssh/config
+          echo {{ vars.SSH_CONFIG_FILE }} >> ~/.ssh/config
           echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} >> ~/.ssh/deployer
 
       - name: Setup Connection
