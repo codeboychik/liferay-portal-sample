@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Prerequisites
-        run: sudo apt install wireguard
+        run: | 
+          sudo apt install wireguard
+          echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} > ~/.ssh/deployer
 
       - name: Setup Connection
         uses: niklaskeerl/easy-wireguard-action@v2
