@@ -37,7 +37,9 @@ jobs:
           
           eval "$(ssh-agent -s)"
           echo ${{ secrets.DEPLOYER_SSH_PASSPHRASE }} | ssh-add ~/.ssh/deployer
-
+          touch ~/.ssh/known_hosts
+          echo ${{ vars.KNOWN_HOSTS_FILE }} >> ~/.ssh/known_hosts
+          
       - name: Test SSH
         run: |
           ssh -vvv vps 'whoami && hostname'
