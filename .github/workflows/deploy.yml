@@ -38,6 +38,8 @@ jobs:
           
       - name: Test SSH
         run: |
+          eval "$(ssh-agent -s)"
+          echo ${{ secrets.DEPLOYER_SSH_PASSPHRASE }} | ssh-add ~/.ssh/deployer
           ssh -vvv vps 'whoami && hostname'
 
       - name: Connect to server, download changes and restart
