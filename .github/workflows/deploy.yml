@@ -36,12 +36,6 @@ jobs:
       
           chmod 600 ~/.ssh/config
           
-          eval "$(ssh-agent -s)"
-          echo ${{ secrets.DEPLOYER_SSH_PASSPHRASE }} | ssh-add ~/.ssh/deployer
-          
-          touch ~/.ssh/authorized_keys
-          echo ${{ vars.DEPLOYER_AUTH_KEYS_FILE }} >> ~/.ssh/authorized_keys
-          
       - name: Test SSH
         run: |
           ssh -vvv vps 'whoami && hostname'
