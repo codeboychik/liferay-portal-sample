@@ -21,6 +21,7 @@ jobs:
           host: ${{ secrets.VPS_HOST_IP }}
           username: ${{ secrets.DEPLOYER_USERNAME }}
           password: ${{ secrets.DEPLOYER_PASS }}
+          key: ${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: | 
             if [ -d liferay-portal-sample ]; then
