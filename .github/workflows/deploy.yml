@@ -10,16 +10,34 @@ jobs:
       - name: Install Prerequisites
         run: | 
           sudo apt install wireguard
-          mkdir ~/.ssh
-          touch ~/.ssh/deployer
-          touch ~/.ssh/config
-          echo {{ vars.SSH_CONFIG_FILE }} >> ~/.ssh/config
-          echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} >> ~/.ssh/deployer
 
       - name: Setup Connection
         uses: niklaskeerl/easy-wireguard-action@v2
         with:
           WG_CONFIG_FILE: ${{ vars.WG_CONFIG_FILE }}
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+      
+          echo "${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}" > ~/.ssh/deployer
+          chmod 600 ~/.ssh/deployer
+      
+          cat > ~/.ssh/config << 'EOF'
+          Host vps
+            HostName 10.8.0.1
+            User deploy
+            IdentityFile ~/.ssh/deployer
+            IdentitiesOnly yes
+            StrictHostKeyChecking accept-new
+          EOF
+      
+          chmod 600 ~/.ssh/config
+
+      - name: Test SSH
+        run: |
+          ssh -vvv vps 'whoami && hostname'
 
       - name: Connect to server, download changes and restart
         uses: appleboy/ssh-action@v1.2.5
