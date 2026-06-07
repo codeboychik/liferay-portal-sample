@@ -34,6 +34,8 @@ jobs:
           EOF
       
           chmod 600 ~/.ssh/config
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/deployer
 
       - name: Test SSH
         run: |
