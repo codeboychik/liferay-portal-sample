@@ -16,7 +16,7 @@ jobs:
           WG_CONFIG_FILE: ${{ vars.WG_CONFIG_FILE }}
 
       - name: Connect to server, download changes and restart
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.VPS_HOST_IP }}
           username: ${{ secrets.DEPLOYER_USERNAME }}
