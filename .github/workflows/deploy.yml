@@ -10,6 +10,7 @@ jobs:
       - name: Install Prerequisites
         run: | 
           sudo apt install wireguard
+          mkdir ~/.ssh
           echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} > ~/.ssh/deployer
 
       - name: Setup Connection
