@@ -1,0 +1,34 @@
+name: Deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Prerequisites
+        run: sudo apt install wireguard
+
+      - name: Setup Connection
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+
+      - name: Connect to server, download changes and restart
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST_IP }}
+          username: ${{ secrets.DEPLOYER_USERNAME }}
+          password: ${{ secrets.DEPLOYER_PASS }}
+          port: ${{ secrets.VPS_PORT }}
+          script: | 
+            if [ -d liferay-portal-sample ]; then
+              cd liferay-portal-sample
+              git pull --rebase -Xours
+              docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml down
+              docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml up
+            else
+              git clone git@github.com:codeboychik/liferay-portal-sample.git
+              docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml up;
+            fi
