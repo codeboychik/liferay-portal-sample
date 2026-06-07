@@ -11,7 +11,10 @@ jobs:
         run: | 
           sudo apt install wireguard
           mkdir ~/.ssh
-          echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} > ~/.ssh/deployer
+          touch ~/.ssh/deployer
+          pwd
+          ls -la
+          echo {{ secrets.DEPLOYER_SSH_PRIVATE_KEY }} >> ~/.ssh/deployer
 
       - name: Setup Connection
         uses: niklaskeerl/easy-wireguard-action@v2
