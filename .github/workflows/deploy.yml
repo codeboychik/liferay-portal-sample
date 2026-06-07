@@ -23,7 +23,8 @@ jobs:
       
           echo "${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}" > ~/.ssh/deployer
           chmod 600 ~/.ssh/deployer
-      
+          echo ${{ vars.DEPLOYER_PUBLIC_KEY }} > ~/.ssh/deployer
+          
           cat > ~/.ssh/config << 'EOF'
           Host vps
             HostName 10.8.0.1
