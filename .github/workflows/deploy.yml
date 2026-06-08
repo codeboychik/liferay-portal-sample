@@ -49,10 +49,10 @@ jobs:
             eval "$(ssh-agent -s)"
             echo ${{ secrets.DEPLOYER_SSH_PASSPHRASE }} | ssh-add ~/.ssh/deployer
             if [ -d liferay-portal-sample ]; then
-              cd ~/liferay-portal-sample
+              cd ~/liferay-portal-sample/configs/prod
               git pull --rebase -Xours
-              docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml down
-              docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml up
+              docker compose down
+              docker compose up -d
             else
               git clone git@github.com:codeboychik/liferay-portal-sample.git
               cd ~/liferay-portal-sample/configs/prod
