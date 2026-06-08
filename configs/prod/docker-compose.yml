@@ -1,6 +1,8 @@
 services:
   portal:
     image: ghcr.io/codeboychik/liferay-portal-sample:${RELEASE_TAG:-master}
+    mem_limit: 3g
+    memswap_limit: 3g
     ports:
       - "8080:8080"
     volumes:
