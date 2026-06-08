@@ -51,7 +51,9 @@ jobs:
           key: ${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
           passphrase: ${{ secrets.DEPLOYER_SSH_PASSPHRASE }}
-          script: | 
+          script: |
+            eval "$(ssh-agent -s)"
+            echo ${{ secrets.DEPLOYER_SSH_PASSPHRASE }} | ssh-add ~/.ssh/deployer
             if [ -d liferay-portal-sample ]; then
               cd liferay-portal-sample
               git pull --rebase -Xours
