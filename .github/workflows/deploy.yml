@@ -61,5 +61,6 @@ jobs:
               docker compose -f liferay-portal-sample/configs/prod/docker-compose.yml up
             else
               git clone git@github.com:codeboychik/liferay-portal-sample.git
-              docker compose -f ./configs/prod/docker-compose.yml up;
+              cd ~/liferay-portal-sample/configs/prod
+              docker compose up -d;
             fi
