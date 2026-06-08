@@ -3,3 +3,5 @@ services:
     image: ghcr.io/codeboychik/liferay-portal-sample:${RELEASE_TAG:-master}
     ports:
       - "8080:8080"
+    volumes:
+      - ./portal-ext.properties:/mnt/liferay/files/portal-ext.properties
