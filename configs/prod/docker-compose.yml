@@ -6,3 +6,4 @@ services:
     volumes:
       - ./portal-ext.properties:/mnt/liferay/files/portal-ext.properties
       - ./setenv.sh:/mnt/liferay/files/tomcat/bin/setenv.sh
+      - ./osgi/configs/com.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config:/mnt/liferay/files/osgi/configs/com.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config
