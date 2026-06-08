@@ -5,3 +5,4 @@ services:
       - "8080:8080"
     volumes:
       - ./portal-ext.properties:/mnt/liferay/files/portal-ext.properties
+      - ./setenv.sh:/mnt/liferay/files/tomcat/bin/setenv.sh
