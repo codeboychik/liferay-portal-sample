@@ -1,5 +1,5 @@
 services:
   portal:
-    image: ghcr.io/codeboychik/liferay-portal-sample:$${RELEASE_TAG:-master} # escape $ with $$ for correct interpolating
+    image: ghcr.io/codeboychik/liferay-portal-sample:${RELEASE_TAG:-master}
     ports:
       - "8080:8080"
