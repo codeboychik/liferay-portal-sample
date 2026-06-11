@@ -1,0 +1,47 @@
+# may write inside the workspace roots
+# default_permissions = ":workspace"
+
+# default rules are the rules defined there
+default_permissions = "liferay-portal-sample"
+
+# sandbox_mode = "read-only"
+sandbox_mode = "workspace-write"
+
+# never attempt asking for approvals
+# approval_policy = "never"
+
+# never ask for approval outside sandbox,
+# can write inside workspace
+# admin rules are on ("forbid rm -rf")
+approval_policy = { granular = { sandbox_approval = false, rules = true, mcp_elicitations = false, request_permissions = false, skill_approval = false } }
+[permissions.liferay-portal-sample]
+extends = ":workspace"
+
+# allow outside workspace
+[permissions.liferay-portal-sample.filesystem]
+"C:\\Users\\andrey.chernenko\\.m2\\repository" = "write"
+"C:\\Users\\andrey.chernenko\\.m2\\settings.xml" = "read"
+
+# allow inside workspace
+[permissions.liferay-portal-sample.filesystem.":workspace_roots"]
+# allow writing in any file
+"." = "write"
+
+# read-only
+"configs" = "read"
+"modules/" = "read"
+
+# denied
+"**/*.env" = "deny"
+
+# TODO network policies (web search), allowed commands
+
+[permissions.liferay-portal-sample.network]
+enabled = true
+
+[permissions.portlet-build.network.domains]
+"repo.maven.apache.org" = "allow"
+"repo1.maven.org" = "allow"
+"repository.liferay.com" = "allow"
+"nexus.lnd.bz" = "allow"
+"bitbucket.org" = "allow"

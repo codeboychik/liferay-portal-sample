@@ -1,0 +1,30 @@
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "forbidden",
+    justification = "Publishing changes from Codex is not allowed",
+    match = ["git push", "git push origin main"],
+    not_match = ["git status", "git pull"],
+)
+
+prefix_rule(
+    pattern = ["curl"],
+    decision = "forbidden",
+    justification = "Direct arbitrary HTTP calls are not allowed",
+    match = ["curl https://example.com"],
+)
+
+prefix_rule(
+    pattern = ["mvn", "deploy"],
+    decision = "forbidden",
+    justification = "Deploying artifacts from Codex is not allowed",
+    match = ["mvn deploy"],
+    not_match = ["mvn test", "mvn package"],
+)
+
+prefix_rule(
+    pattern = ["docker", "push"],
+    decision = "forbidden",
+    justification = "Publishing Docker images from Codex is not allowed",
+    match = ["docker push my-image:latest"],
+    not_match = ["docker ps", "docker build ."],
+)
